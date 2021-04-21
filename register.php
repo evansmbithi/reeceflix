@@ -1,24 +1,22 @@
 <?php
+# reference to the class
+require_once("includes/classes/FormSanitizer.php");
+
     if(isset($_POST["submitBtn"])){
-        $firstName = sanitizeFormString($_POST["firstName"]); //sanitized version of the string
-        echo $firstName;
+        # Access the sanitizer class
+        $firstName = FormSanitizer::sanitizeFormString($_POST["firstName"]); 
+        # :: represents the static function property
         
+        $lastName = FormSanitizer::sanitizeFormString($_POST["lastName"]);
+        $username = FormSanitizer::sanitizeFormUsername($_POST["username"]);
+        $email = FormSanitizer::sanitizeFormEmail($_POST["email"]);
+        $email2 = FormSanitizer::sanitizeFormEmail($_POST["email2"]);
+        $password = FormSanitizer::sanitizeFormPassword($_POST["password"]);
+        $password2 = FormSanitizer::sanitizeFormPassword($_POST["password2"]);
+
+        echo $firstName."<br>", $lastName."<br>", $username."<br>", $email."<br>", $email2."<br>", $password."<br>", $password2."<br>";
     }
 
-    function sanitizeFormString ($inputText){
-        //remove HTML tags from any string
-        $inputText = strip_tags($inputText);
-        //remove spaces from text
-        $inputText = str_replace(" ", "", $inputText); //replace any space with an empty string in $inputText
-        //for people with spaces in their names e.g Al Mashauri
-        //$inputText = trim($inputText); //removes spaces from before and after but not within the string
-        
-        //convert strings to lowercase
-        $inputText = strtolower($inputText);
-        //uppercase the first character of the string
-        $inputText = ucfirst($inputText);
-        return $inputText;
-    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
