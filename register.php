@@ -18,6 +18,7 @@ require_once("includes/classes/Account.php");
         $password2 = FormSanitizer::sanitizeFormPassword($_POST["password2"]);
 
         # echo $firstName."<br>", $lastName."<br>", $username."<br>", $email."<br>", $email2."<br>", $password."<br>", $password2."<br>";
+        $account->validateFirstName($firstName);
     }
 
 ?>
@@ -42,6 +43,7 @@ require_once("includes/classes/Account.php");
             </div>
 
             <form action="" method="POST">
+                <?php echo $account->getError("First name wrong length") ?>
                 <input type="text" name="firstName" placeholder="First Name" required>
                 <input type="text" name="lastName" placeholder="Last Name" required>
                 <input type="text" name="username" placeholder="Username" required>
