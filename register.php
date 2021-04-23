@@ -1,12 +1,15 @@
 <?php
 # reference to the class
+require_once("includes/config.php");
 require_once("includes/classes/FormSanitizer.php");
+require_once("includes/classes/Account.php");
+
+    $account = new Account($con);
 
     if(isset($_POST["submitBtn"])){
         # Access the sanitizer class
-        $firstName = FormSanitizer::sanitizeFormString($_POST["firstName"]); 
         # :: represents the static function property
-        
+        $firstName = FormSanitizer::sanitizeFormString($_POST["firstName"]);       
         $lastName = FormSanitizer::sanitizeFormString($_POST["lastName"]);
         $username = FormSanitizer::sanitizeFormUsername($_POST["username"]);
         $email = FormSanitizer::sanitizeFormEmail($_POST["email"]);
@@ -14,7 +17,7 @@ require_once("includes/classes/FormSanitizer.php");
         $password = FormSanitizer::sanitizeFormPassword($_POST["password"]);
         $password2 = FormSanitizer::sanitizeFormPassword($_POST["password2"]);
 
-        echo $firstName."<br>", $lastName."<br>", $username."<br>", $email."<br>", $email2."<br>", $password."<br>", $password2."<br>";
+        # echo $firstName."<br>", $lastName."<br>", $username."<br>", $email."<br>", $email2."<br>", $password."<br>", $password2."<br>";
     }
 
 ?>
