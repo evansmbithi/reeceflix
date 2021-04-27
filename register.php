@@ -5,6 +5,8 @@ require_once("includes/classes/FormSanitizer.php");
 require_once("includes/classes/Account.php");
 require_once("includes/classes/Constants.php");
 
+    # create an instance of the Account class with a $con variable from config.php
+    # the object calls the constructor in the Account class
     $account = new Account($con);
 
     if(isset($_POST["submitBtn"])){
@@ -21,7 +23,14 @@ require_once("includes/classes/Constants.php");
         # echo $firstName."<br>", $lastName."<br>", $username."<br>", $email."<br>", $email2."<br>", $password."<br>", $password2."<br>";
         # $account->validateFirstName($firstName); call this from the account class
 
-        $account->register($firstName,$lastName,$username,$email,$email2,$password,$password2);
+        # handle all validations
+        $success = $account->register($firstName,$lastName,$username,$email,$email2,$password,$password2);
+
+        if($success){
+            # store session
+            # go to index.php
+            header("Location: index.php"); 
+        }
     }
 
 ?>
